@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RideSharing.Contracts\RideSharing.Contracts.csproj" />
+    <ProjectReference Include="..\RideSharing.Data\RideSharing.Data.csproj" />
+    <ProjectReference Include="..\RideSharing.Repositories\RideSharing.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>
