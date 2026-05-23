@@ -7,6 +7,5 @@ public class CharacterServices : BaseService<Character>
 {
     public CharacterServices(AppDbContext dbContext) : base(dbContext)
     {
-        
     }
 }

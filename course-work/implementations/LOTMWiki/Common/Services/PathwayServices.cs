@@ -7,6 +7,5 @@ public class PathwayServices : BaseService<Pathway>
 {
     public PathwayServices(AppDbContext dbContext) : base(dbContext)
     {
-        
     }
 }

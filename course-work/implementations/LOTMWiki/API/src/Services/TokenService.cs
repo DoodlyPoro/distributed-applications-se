@@ -19,7 +19,7 @@ public class TokenService
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         JwtSecurityToken token = new JwtSecurityToken(
-            issuer: "LOTMWikiApi",
+            issuer: "LOTMWikiAPI",
             audience: "front-end",
             claims: claims,
             expires: DateTime.Now.AddMinutes(2),
@@ -28,4 +28,4 @@ public class TokenService
         string tokenData = new JwtSecurityTokenHandler().WriteToken(token);
         return tokenData;
     }
-}
+}   

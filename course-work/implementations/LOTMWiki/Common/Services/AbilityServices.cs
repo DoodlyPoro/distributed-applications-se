@@ -7,6 +7,5 @@ public class AbilityServices : BaseService<Ability>
 {
     public AbilityServices(AppDbContext dbContext) : base(dbContext)
     {
-        
     }
 }

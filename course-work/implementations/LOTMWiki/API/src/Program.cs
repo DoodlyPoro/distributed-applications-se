@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
 
 namespace api
 {
@@ -32,6 +33,14 @@ namespace api
                         IssuerSigningKey =
                             new SymmetricSecurityKey(Encoding.ASCII.GetBytes("parola123parola123parola123parola123"))
                     };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            Console.WriteLine(context.Exception);
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
@@ -47,7 +56,30 @@ namespace api
             });
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "LOTMWikiAPI",
+                        Version = "v1"
+                    });
+                    
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                    {
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "Bearer",
+                        BearerFormat = "JWT",
+                        In = ParameterLocation.Header,
+                        Description = "JWT Authorization header using the Bearer scheme."
+                    });
+                    
+                    c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+                    {
+                        [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>(Array.Empty<string>())
+                    });
+                });
+            
 
             builder.Services.AddScoped<UserServices>();
             builder.Services.AddDbContext<AppDbContext>();

@@ -13,10 +13,9 @@ namespace api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly UserServices userServices;
-
-    public AuthController(UserServices userservices)
+    public AuthController(UserServices userServices)
     {
-        this.userServices = userservices;
+        this.userServices = userServices;
     }
     
     [HttpPost]
@@ -41,7 +40,7 @@ public class AuthController : ControllerBase
 
         return Ok(new
         {
-            token = token
+            token
         });
     }
 }

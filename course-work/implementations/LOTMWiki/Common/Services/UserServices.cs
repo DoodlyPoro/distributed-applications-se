@@ -7,6 +7,5 @@ public class UserServices : BaseService<User>
 {
     public UserServices(AppDbContext dbContext) : base(dbContext)
     {
-        
     }
 }

@@ -7,6 +7,5 @@ public class EpochServices : BaseService<Epoch>
 {
     public EpochServices(AppDbContext dbContext) : base(dbContext)
     {
-        
     }
 }
