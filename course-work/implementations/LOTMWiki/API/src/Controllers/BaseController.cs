@@ -77,6 +77,9 @@ where EGetResponse : BaseGetResponse<E>, new()
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] ERequest model)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         E item = new E();
         PopulateEntity(item, model, out string error);
         if (!string.IsNullOrEmpty(error))
@@ -98,6 +101,9 @@ where EGetResponse : BaseGetResponse<E>, new()
     [Route("{id}")]
     public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ERequest model)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         E forUpdate = await Service.GetById(id);
         if (forUpdate == null)
             throw new Exception($"{typeof(E).Name} not found");

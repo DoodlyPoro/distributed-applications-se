@@ -2,8 +2,10 @@
 using Common.Persistance;
 using Common.Services;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
@@ -43,6 +45,7 @@ namespace api
                     };
                 });
 
+            builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
             builder.Services.AddCors(options =>
@@ -82,7 +85,15 @@ namespace api
             
 
             builder.Services.AddScoped<UserServices>();
-            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddScoped<EpochServices>();
+            builder.Services.AddScoped<PathwayServices>();
+            builder.Services.AddScoped<SequenceServices>();
+            builder.Services.AddScoped<CharacterServices>();
+            builder.Services.AddScoped<AbilityServices>();
+            
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
             
             var app = builder.Build();
             app.UseHttpsRedirection();

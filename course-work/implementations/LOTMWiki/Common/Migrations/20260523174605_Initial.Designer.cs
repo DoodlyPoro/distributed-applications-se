@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Common.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260518210211_Initial")]
+    [Migration("20260523174605_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -41,7 +41,7 @@ namespace Common.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("SequenceId")
+                    b.Property<int?>("SequenceId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -59,19 +59,19 @@ namespace Common.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Continent")
+                    b.Property<string>("Country")
                         .HasColumnType("text");
 
-                    b.Property<int>("EpochId")
+                    b.Property<int?>("EpochId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("PathwayId")
+                    b.Property<int?>("PathwayId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SequenceId")
+                    b.Property<int?>("SequenceId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -99,8 +99,8 @@ namespace Common.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Number")
-                        .HasColumnType("text");
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
 
                     b.Property<int>("StartYear")
                         .HasColumnType("integer");
@@ -146,7 +146,7 @@ namespace Common.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PathwayId")
+                    b.Property<int?>("PathwayId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -200,8 +200,7 @@ namespace Common.Migrations
                     b.HasOne("Common.Entity.Sequence", "Sequence")
                         .WithMany()
                         .HasForeignKey("SequenceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Sequence");
                 });
@@ -211,20 +210,17 @@ namespace Common.Migrations
                     b.HasOne("Common.Entity.Epoch", "Epoch")
                         .WithMany()
                         .HasForeignKey("EpochId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Common.Entity.Pathway", "Pathway")
                         .WithMany()
                         .HasForeignKey("PathwayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Common.Entity.Sequence", "Sequence")
                         .WithMany()
                         .HasForeignKey("SequenceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Epoch");
 
@@ -238,8 +234,7 @@ namespace Common.Migrations
                     b.HasOne("Common.Entity.Pathway", "Pathway")
                         .WithMany()
                         .HasForeignKey("PathwayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Pathway");
                 });

@@ -17,7 +17,7 @@ namespace Common.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Number = table.Column<string>(type: "text", nullable: true),
+                    Number = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     StartYear = table.Column<int>(type: "integer", nullable: false),
                     EndYear = table.Column<int>(type: "integer", nullable: false)
@@ -67,7 +67,7 @@ namespace Common.Migrations
                     Number = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    PathwayId = table.Column<int>(type: "integer", nullable: false)
+                    PathwayId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,7 +88,7 @@ namespace Common.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    SequenceId = table.Column<int>(type: "integer", nullable: false)
+                    SequenceId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,10 +108,10 @@ namespace Common.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Continent = table.Column<string>(type: "text", nullable: true),
-                    EpochId = table.Column<int>(type: "integer", nullable: false),
-                    PathwayId = table.Column<int>(type: "integer", nullable: false),
-                    SequenceId = table.Column<int>(type: "integer", nullable: false)
+                    Country = table.Column<string>(type: "text", nullable: true),
+                    EpochId = table.Column<int>(type: "integer", nullable: true),
+                    PathwayId = table.Column<int>(type: "integer", nullable: true),
+                    SequenceId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

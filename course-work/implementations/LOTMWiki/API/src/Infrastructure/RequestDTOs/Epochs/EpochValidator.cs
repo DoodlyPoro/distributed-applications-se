@@ -7,7 +7,7 @@ public class EpochValidator : AbstractValidator<EpochRequest>
 {
     public EpochValidator()
     {
-        RuleFor(epoch => epoch.EpochNumber)
+        RuleFor(epoch => epoch.Number)
             .NotEmpty().WithMessage("Epoch Number is required.")
             .GreaterThan(0).WithMessage("Epoch Number must be greater than zero.");
         
