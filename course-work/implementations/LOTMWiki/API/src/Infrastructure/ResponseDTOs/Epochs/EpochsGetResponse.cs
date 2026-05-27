@@ -4,7 +4,7 @@ using Common.Entity;
 
 namespace api.Infrastructure.ResponseDTOs.Epochs;
 
-public class EpochsGetResponse : BaseGetResponse<Epoch>
+public class EpochsGetResponse : BaseGetResponse<EpochResponse>
 {
     public EpochsGetFilterRequest Filter { get; set; }
 }

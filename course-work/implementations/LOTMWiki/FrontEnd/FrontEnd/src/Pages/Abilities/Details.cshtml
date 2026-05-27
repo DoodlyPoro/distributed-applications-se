@@ -1,0 +1,81 @@
+@page "{id:int}"
+@model FrontEnd.Pages.Abilities.DetailsModel
+
+@{
+    ViewData["Title"] = "Ability Details";
+}
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Ability Details</h2>
+
+            <p class="text-muted mb-4">
+                Read-only information about this ability.
+            </p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">
+                    @Model.Error
+                </div>
+            }
+            else if (Model.Ability != null)
+            {
+                <div class="mb-4">
+                    <label class="text-muted small">Name</label>
+                    <div class="fs-5 fw-semibold">
+                        @Model.Ability.Name
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Description</label>
+                    <div class="border rounded-3 p-3 bg-light">
+                        @(string.IsNullOrWhiteSpace(Model.Ability.Description)
+                            ? "No description"
+                            : Model.Ability.Description)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Sequence</label>
+                    <div>
+                        @if (Model.Ability.SequenceId != null)
+                        {
+                            <span class="badge bg-primary">
+                                Sequence @Model.Ability.SequenceId
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">
+                                None
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Abilities/Index"
+                   class="btn btn-outline-secondary">
+                    Back
+                </a>
+
+                @if (Model.Ability != null)
+                {
+                    <a asp-page="/Abilities/Edit"
+                       asp-route-id="@Model.Ability.Id"
+                       class="btn btn-dark">
+                        Edit
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>

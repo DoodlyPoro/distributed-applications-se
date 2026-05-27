@@ -4,7 +4,7 @@ using Common.Entity;
 
 namespace api.Infrastructure.ResponseDTOs.Sequences;
 
-public class SequencesGetResponse : BaseGetResponse<Sequence>
+public class SequencesGetResponse : BaseGetResponse<SequenceResponse>
 {
     public SequencesGetFilterRequest Filter { get; set; }
 }

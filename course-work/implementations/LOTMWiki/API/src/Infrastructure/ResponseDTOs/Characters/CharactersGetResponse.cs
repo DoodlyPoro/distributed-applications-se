@@ -4,7 +4,7 @@ using Common.Entity;
 
 namespace api.Infrastructure.ResponseDTOs.Characters;
 
-public class CharactersGetResponse : BaseGetResponse<Character>
+public class CharactersGetResponse : BaseGetResponse<CharacterResponse>
 {
     public CharactersGetFilterRequest Filter { get; set; }
 }

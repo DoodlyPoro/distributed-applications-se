@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Shared;
 using api.Infrastructure.ResponseDTOs.Shared;
 using api.Services;
+using AutoMapper;
 using Common;
 using Common.Entity;
 using Common.Services;
@@ -11,18 +12,21 @@ namespace api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BaseController<E, EService, ERequest,EGetRequest, EGetResponse> : ControllerBase
+public class BaseController<E, EService, ERequest,EGetRequest, EResponse, EGetResponse> : ControllerBase
 where E : BaseEntity, new()
 where EService : BaseService<E>
 where ERequest : class, new()
 where EGetRequest : BaseGetRequest, new()
-where EGetResponse : BaseGetResponse<E>, new()
+where EResponse : class
+where EGetResponse : BaseGetResponse<EResponse>, new()
 {
     protected readonly EService Service;
+    protected readonly IMapper Mapper;
 
-    public BaseController(EService service)
+    public BaseController(EService service, IMapper mapper)
     {
         Service = service;
+        Mapper = mapper;
     }
     
     protected virtual void PopulateEntity(E item, ERequest model, out string error)
@@ -56,12 +60,14 @@ where EGetResponse : BaseGetResponse<E>, new()
         PopulateGetResponse(model, response);
 
         response.Pager.Count = await Service.Count(filter);
-        response.Items = await Service.GetAll(
+        var entities = await Service.GetAll(
             filter,
             model.OrderBy,
             model.SortAsc,
             model.Pager.Page,
             model.Pager.PageSize);
+        
+        response.Items = Mapper.Map<List<EResponse>>(entities);
 
         return Ok(ServiceResult<EGetResponse>.Success(response));
     }

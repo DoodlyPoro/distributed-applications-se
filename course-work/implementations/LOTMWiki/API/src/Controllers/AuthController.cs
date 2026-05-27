@@ -37,7 +37,7 @@ public class AuthController : ControllerBase
 
         TokenService tokenService = new TokenService();
         string token = tokenService.CreateToken(loggedUser);
-
+        
         return Ok(new
         {
             token

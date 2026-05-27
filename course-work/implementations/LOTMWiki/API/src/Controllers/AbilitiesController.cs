@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Abilities;
 using api.Infrastructure.ResponseDTOs.Abilities;
+using AutoMapper;
 using Common.Entity;
 using Common.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class AbilitiesController : BaseController<Ability, AbilityServices, AbilityRequest, AbilitiesGetRequest, AbilitiesGetResponse>
+public class AbilitiesController : BaseController<Ability, AbilityServices, AbilityRequest, AbilitiesGetRequest, AbilityResponse, AbilitiesGetResponse>
 {
-    public AbilitiesController(AbilityServices abilityServices) : base(abilityServices) {}
+    public AbilitiesController(AbilityServices abilityServices, IMapper mapper) : base(abilityServices, mapper) {}
     
     protected override void PopulateEntity(Ability item, AbilityRequest model, out string error)
     {

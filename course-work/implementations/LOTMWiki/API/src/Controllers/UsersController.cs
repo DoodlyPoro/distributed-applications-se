@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Users;
 using api.Infrastructure.ResponseDTOs.Users;
+using AutoMapper;
 using Common.Entity;
 using Common.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class UsersController : BaseController<User, UserServices, UserRequest, UsersGetRequest, UsersGetResponse>
+public class UsersController : BaseController<User, UserServices, UserRequest, UsersGetRequest, UserResponse, UsersGetResponse>
 {
-    public UsersController(UserServices userServices) : base(userServices)
+    public UsersController(UserServices userServices, IMapper mapper) : base(userServices, mapper)
     {
         
     }

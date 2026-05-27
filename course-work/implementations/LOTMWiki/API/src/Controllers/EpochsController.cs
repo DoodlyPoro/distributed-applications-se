@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Epochs;
 using api.Infrastructure.ResponseDTOs.Epochs;
+using AutoMapper;
 using Common.Entity;
 using Common.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class EpochsController : BaseController<Epoch, EpochServices, EpochRequest, EpochsGetRequest, EpochsGetResponse>
+public class EpochsController : BaseController<Epoch, EpochServices, EpochRequest, EpochsGetRequest, EpochResponse, EpochsGetResponse>
 {
-    public EpochsController(EpochServices epochServices) : base(epochServices) {}
+    public EpochsController(EpochServices epochServices, IMapper mapper) : base(epochServices, mapper) {}
     
     protected override void PopulateEntity(Epoch item, EpochRequest model, out string error)
     {

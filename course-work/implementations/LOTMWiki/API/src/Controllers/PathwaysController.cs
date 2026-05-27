@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Pathways;
 using api.Infrastructure.ResponseDTOs.Pathways;
+using AutoMapper;
 using Common.Entity;
 using Common.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class PathwaysController : BaseController<Pathway, PathwayServices, PathwayRequest, PathwayGetRequest, PathwaysGetResponse>
+public class PathwaysController : BaseController<Pathway, PathwayServices, PathwayRequest, PathwayGetRequest, PathwayResponse, PathwaysGetResponse>
 {
-    public PathwaysController(PathwayServices pathwayServices) : base(pathwayServices) {}
+    public PathwaysController(PathwayServices pathwayServices, IMapper mapper) : base(pathwayServices, mapper) {}
 
     protected override void PopulateEntity(Pathway item, PathwayRequest model, out string error)
     {

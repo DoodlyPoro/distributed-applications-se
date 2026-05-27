@@ -4,7 +4,7 @@ using Common.Entity;
 
 namespace api.Infrastructure.ResponseDTOs.Pathways;
 
-public class PathwaysGetResponse : BaseGetResponse<Pathway>
+public class PathwaysGetResponse : BaseGetResponse<PathwayResponse>
 {
     public PathwayGetFilterRequest Filter { get; set; }
 }

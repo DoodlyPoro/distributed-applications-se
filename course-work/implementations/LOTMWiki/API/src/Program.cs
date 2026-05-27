@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using api.Middleware;
 using Common.Persistance;
 using Common.Services;
 using FluentValidation;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using api.Middleware;
 
 namespace api
 {
@@ -82,7 +84,8 @@ namespace api
                         [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>(Array.Empty<string>())
                     });
                 });
-            
+
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             builder.Services.AddScoped<UserServices>();
             builder.Services.AddScoped<EpochServices>();
@@ -96,6 +99,7 @@ namespace api
                     builder.Configuration.GetConnectionString("DefaultConnection")));
             
             var app = builder.Build();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseAuthentication();

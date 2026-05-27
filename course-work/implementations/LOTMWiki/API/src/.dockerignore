@@ -1,6 +1,0 @@
-obj
-!obj/Docker/publish/*
-!obj/Docker/empty/
-bin
-.vscode
-

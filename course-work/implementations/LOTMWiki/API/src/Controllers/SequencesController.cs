@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using api.Infrastructure.RequestDTOs.Sequences;
 using api.Infrastructure.ResponseDTOs.Sequences;
+using AutoMapper;
 using Common.Entity;
 using Common.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class SequencesController : BaseController<Sequence, SequenceServices, SequenceRequest, SequenceGetRequest, SequencesGetResponse>
+public class SequencesController : BaseController<Sequence, SequenceServices, SequenceRequest, SequenceGetRequest, SequenceResponse, SequencesGetResponse>
 {
-    public SequencesController(SequenceServices sequenceServices) : base(sequenceServices) {}
+    public SequencesController(SequenceServices sequenceServices, IMapper mapper) : base(sequenceServices, mapper) {}
 
     protected override void PopulateEntity(Sequence item, SequenceRequest model, out string error)
     {
