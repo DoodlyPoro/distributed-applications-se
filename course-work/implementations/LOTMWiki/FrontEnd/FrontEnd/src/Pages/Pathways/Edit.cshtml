@@ -1,0 +1,49 @@
+@page "{id:int}"
+@model FrontEnd.Pages.Pathways.EditModel
+
+@{
+    ViewData["Title"] = "Edit Pathway";
+}
+
+<div class="container mt-5" style="max-width: 650px;">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Edit Pathway</h2>
+            <p class="text-muted mb-4">Update this pathway.</p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">@Model.Error</div>
+            }
+
+            <form method="post">
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Pathway.Name" class="form-label"></label>
+                    <input asp-for="Pathway.Name" class="form-control" />
+                    <span asp-validation-for="Pathway.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Pathway.Description" class="form-label"></label>
+                    <textarea asp-for="Pathway.Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Pathway.Description" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Pathways/Index" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-dark">Save Changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

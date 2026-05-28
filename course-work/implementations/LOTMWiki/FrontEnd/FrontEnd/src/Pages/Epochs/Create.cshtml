@@ -1,0 +1,59 @@
+@page
+@model FrontEnd.Pages.Epochs.CreateModel
+
+@{
+    ViewData["Title"] = "Create Epoch";
+}
+
+<div class="container mt-5" style="max-width: 650px;">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Create Epoch</h2>
+            <p class="text-muted mb-4">Add a new epoch.</p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">@Model.Error</div>
+            }
+
+            <form method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Epoch.Name" class="form-label"></label>
+                    <input asp-for="Epoch.Name" class="form-control" />
+                    <span asp-validation-for="Epoch.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Epoch.Number" class="form-label"></label>
+                    <input asp-for="Epoch.Number" class="form-control" />
+                    <span asp-validation-for="Epoch.Number" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Epoch.StartYear" class="form-label"></label>
+                    <input asp-for="Epoch.StartYear" class="form-control" />
+                    <span asp-validation-for="Epoch.StartYear" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Epoch.EndYear" class="form-label"></label>
+                    <input asp-for="Epoch.EndYear" class="form-control" />
+                    <span asp-validation-for="Epoch.EndYear" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Epochs/Index" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-dark">Create</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

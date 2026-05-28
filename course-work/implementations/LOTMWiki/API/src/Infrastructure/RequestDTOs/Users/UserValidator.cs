@@ -21,6 +21,8 @@ public class UserValidator : AbstractValidator<UserRequest>
             .NotEmpty().WithMessage("Lastname is required.")
             .MaximumLength(25).WithMessage("Lastname must be at most 25 characters long.");
         RuleFor(user => user.Age)
-            .NotEmpty().WithMessage("Age is required.");
+            .NotEmpty().WithMessage("Age is required.")
+            .GreaterThan(0).WithMessage("Age must be greater than zero.")
+            .LessThan(120).WithMessage("Age must be less than 120.");
     }
 }

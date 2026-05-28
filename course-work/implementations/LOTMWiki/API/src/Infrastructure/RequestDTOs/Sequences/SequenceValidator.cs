@@ -8,7 +8,7 @@ public class SequenceValidator : AbstractValidator<SequenceRequest>
     {
         RuleFor(sequence => sequence.Name)
             .NotEmpty().WithMessage("Name is required.")
-            .MinimumLength(5).WithMessage("Name must be at least 5 characters long.")
+            .MinimumLength(4).WithMessage("Name must be at least 4 characters long.")
             .MaximumLength(30).WithMessage("Name must be no more than 30 characters long.");
         
         RuleFor(sequence => sequence.Number)

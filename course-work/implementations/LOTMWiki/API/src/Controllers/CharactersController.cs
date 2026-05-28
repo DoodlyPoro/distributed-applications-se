@@ -39,8 +39,8 @@ public class CharactersController :  BaseController<Character, CharacterServices
         return c =>
             (string.IsNullOrEmpty(model.Filter.Name) || c.Name.Contains(model.Filter.Name)) &&
             (string.IsNullOrEmpty(model.Filter.Country) || c.Country.Contains(model.Filter.Country)) &&
-            (!model.Filter.EpochId.HasValue || c.EpochId == model.Filter.EpochId.Value) &&
-            (!model.Filter.SequenceId.HasValue || c.SequenceId == model.Filter.SequenceId.Value) &&
-            (!model.Filter.PathwayId.HasValue || c.PathwayId == model.Filter.PathwayId.Value);
+            (model.Filter.SequenceId == null || c.SequenceId == model.Filter.SequenceId) &&
+            (model.Filter.PathwayId == null ||  c.PathwayId == model.Filter.PathwayId) &&
+            (model.Filter.EpochId == null || c.EpochId == model.Filter.EpochId);
     }
 }

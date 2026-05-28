@@ -1,0 +1,62 @@
+@page "{id:int}"
+@model FrontEnd.Pages.Characters.DetailsModel
+
+@{
+    ViewData["Title"] = "Character Details";
+}
+
+<div class="container mt-5" style="max-width: 750px;">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Character Details</h2>
+            <p class="text-muted mb-4">Read-only information about this character.</p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">@Model.Error</div>
+            }
+            else if (Model.Character != null)
+            {
+                <div class="mb-4">
+                    <label class="text-muted small">Name</label>
+                    <div class="fs-5 fw-semibold">@Model.Character.Name</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Country</label>
+                    <div>@Model.Character.Country</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Sequence</label>
+                    <div>@(Model.Character.SequenceName ?? "None")</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Pathway</label>
+                    <div>@(Model.Character.PathwayName ?? "None")</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Epoch</label>
+                    <div>@(Model.Character.EpochName ?? "None")</div>
+                </div>
+            }
+
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Characters/Index" class="btn btn-outline-secondary">Back</a>
+
+                @if (Model.Character != null)
+                {
+                    <a asp-page="/Characters/Edit"
+                       asp-route-id="@Model.Character.Id"
+                       class="btn btn-dark">
+                        Edit
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

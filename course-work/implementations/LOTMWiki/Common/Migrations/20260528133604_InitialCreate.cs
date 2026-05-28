@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Common.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -135,11 +135,6 @@ namespace Common.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Age", "Firstname", "Lastname", "Password", "Username" },
-                values: new object[] { 1, 25, "Admin", "Istrator", "adminpass", "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Abilities_SequenceId",

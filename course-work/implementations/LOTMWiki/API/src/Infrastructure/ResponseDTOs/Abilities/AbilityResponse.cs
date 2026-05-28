@@ -6,4 +6,5 @@ public class AbilityResponse
     public string Name { get; set; }
     public string Description { get; set; }
     public int? SequenceId { get; set; }
+    public string? SequenceName { get; set; }
 }

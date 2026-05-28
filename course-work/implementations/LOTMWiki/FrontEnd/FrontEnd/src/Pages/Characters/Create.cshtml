@@ -1,0 +1,65 @@
+@page
+@model FrontEnd.Pages.Characters.CreateModel
+
+@{
+    ViewData["Title"] = "Create Character";
+}
+
+<div class="container mt-5" style="max-width: 700px;">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Create Character</h2>
+            <p class="text-muted mb-4">Add a new character.</p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">@Model.Error</div>
+            }
+
+            <form method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Character.Name" class="form-label"></label>
+                    <input asp-for="Character.Name" class="form-control" />
+                    <span asp-validation-for="Character.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Character.Country" class="form-label"></label>
+                    <input asp-for="Character.Country" class="form-control" />
+                    <span asp-validation-for="Character.Country" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Character.SequenceId" class="form-label">Sequence ID</label>
+                    <input asp-for="Character.SequenceId" class="form-control" placeholder="Optional" />
+                    <span asp-validation-for="Character.SequenceId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Character.PathwayId" class="form-label">Pathway ID</label>
+                    <input asp-for="Character.PathwayId" class="form-control" placeholder="Optional" />
+                    <span asp-validation-for="Character.PathwayId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Character.EpochId" class="form-label">Epoch ID</label>
+                    <input asp-for="Character.EpochId" class="form-control" placeholder="Optional" />
+                    <span asp-validation-for="Character.EpochId" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Characters/Index" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-dark">Create</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

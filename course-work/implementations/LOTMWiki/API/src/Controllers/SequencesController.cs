@@ -37,6 +37,7 @@ public class SequencesController : BaseController<Sequence, SequenceServices, Se
 
         return s =>
             (string.IsNullOrEmpty(model.Filter.Name) || s.Name.Contains(model.Filter.Name)) &&
+            (model.Filter.Number == null || s.Number == model.Filter.Number) &&
             (string.IsNullOrEmpty(model.Filter.Description) || s.Description.Contains(model.Filter.Description)) &&
             (!model.Filter.PathwayId.HasValue || s.PathwayId == model.Filter.PathwayId.Value);
     }

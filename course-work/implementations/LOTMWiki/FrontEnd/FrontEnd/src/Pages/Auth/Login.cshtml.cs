@@ -40,7 +40,7 @@ public class LoginModel : PageModel
 
         HttpContext.Session.SetString("JwtToken", token);
 
-        return RedirectToPage("/Abilities/Index");
+        return RedirectToPage("/Index");
     }
     
     public IActionResult OnPostTest()

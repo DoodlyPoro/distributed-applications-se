@@ -20,6 +20,38 @@ builder.Services.AddHttpClient<AbilityService>()
                 HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         });
 
+builder.Services.AddHttpClient<EpochService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+        new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        });
+
+builder.Services.AddHttpClient<SequenceService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+        new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        });
+
+builder.Services.AddHttpClient<PathwayService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+        new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        });
+
+builder.Services.AddHttpClient<CharacterService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+        new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        });
+
 builder.Services.AddHttpClient<AuthService>()
     .ConfigurePrimaryHttpMessageHandler(() =>
         new HttpClientHandler
@@ -29,6 +61,10 @@ builder.Services.AddHttpClient<AuthService>()
         });
 
 builder.Services.AddScoped<AbilityService>();
+builder.Services.AddScoped<EpochService>();
+builder.Services.AddScoped<SequenceService>();
+builder.Services.AddScoped<PathwayService>();
+builder.Services.AddScoped<CharacterService>();
 builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddHttpContextAccessor();

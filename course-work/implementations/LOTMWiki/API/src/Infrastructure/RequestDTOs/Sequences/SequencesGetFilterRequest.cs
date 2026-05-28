@@ -3,7 +3,7 @@ namespace api.Infrastructure.RequestDTOs.Sequences;
 public class SequencesGetFilterRequest
 {
     public string Name { get; set; }
-    public int Number { get; set; }
+    public int? Number { get; set; }
     public string Description { get; set; }
     public int? PathwayId { get; set; }
 }

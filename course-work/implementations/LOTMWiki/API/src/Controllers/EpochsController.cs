@@ -37,8 +37,8 @@ public class EpochsController : BaseController<Epoch, EpochServices, EpochReques
         
         return e =>
             (string.IsNullOrEmpty(model.Filter.Name) || e.Name.Contains(model.Filter.Name)) &&
-            (int.IsPositive(model.Filter.Number) || e.Number == model.Filter.Number) &&
-            (int.IsPositive(model.Filter.StartYear) || e.StartYear == model.Filter.StartYear) &&
-            (int.IsPositive(model.Filter.EndYear) || e.EndYear == model.Filter.EndYear);
+            (model.Filter.Number == null || e.Number == model.Filter.Number) &&
+            (model.Filter.StartYear == null || e.StartYear == model.Filter.StartYear) &&
+            (model.Filter.EndYear == null || e.EndYear == model.Filter.EndYear);
     }
 }

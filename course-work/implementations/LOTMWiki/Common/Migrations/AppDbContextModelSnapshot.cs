@@ -179,17 +179,6 @@ namespace Common.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Age = 25,
-                            Firstname = "Admin",
-                            Lastname = "Istrator",
-                            Password = "adminpass",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Common.Entity.Ability", b =>

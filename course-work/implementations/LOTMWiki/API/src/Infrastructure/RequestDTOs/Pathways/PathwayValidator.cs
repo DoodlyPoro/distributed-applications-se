@@ -9,7 +9,7 @@ public class PathwayValidator : AbstractValidator<PathwayRequest>
         RuleFor(pathway => pathway.Name)
             .NotEmpty().WithMessage("Name is required")
             .MinimumLength(4).WithMessage("Name must be at least 4 characters long")
-            .MaximumLength(15).WithMessage("Name must be less than 15 characters long");
+            .MaximumLength(25).WithMessage("Name must be less than 25 characters long");
         
         RuleFor(pathway => pathway.Description)
             .NotEmpty().WithMessage("Description is required")

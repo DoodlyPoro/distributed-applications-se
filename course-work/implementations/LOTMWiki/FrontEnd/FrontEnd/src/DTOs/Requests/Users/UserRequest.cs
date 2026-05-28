@@ -16,12 +16,13 @@ public class UserRequest
     
     [Required(ErrorMessage = "First name is required.")]
     [MaxLength(25, ErrorMessage = "First name must be no more than 25 characters long.")]
-    public string Firstname { get; set; }
+    public string FirstName { get; set; }
     
     [Required(ErrorMessage = "Last name is required.")]
     [MaxLength(25, ErrorMessage = "Last name must be no more than 25 characters long.")]
-    public string Lastname { get; set; }
+    public string LastName { get; set; }
     
     [Required(ErrorMessage = "Age is required.")]
+    [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
     public int Age { get; set; }
 }

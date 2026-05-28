@@ -16,7 +16,7 @@ public class BaseService<T> where T : BaseEntity
         Items = dbContext.Set<T>();
     }
 
-    public async Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null, string orderBy = null, bool sortAsc = false, int page = 1, int pageSize = int.MaxValue)
+    public virtual async Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null, string orderBy = null, bool sortAsc = false, int page = 1, int pageSize = int.MaxValue)
     {
         var query = Items.AsQueryable();
         if (filter != null)
@@ -37,7 +37,7 @@ public class BaseService<T> where T : BaseEntity
         return await query.ToListAsync();
     }
 
-    public async Task<T> GetById(int id)
+    public virtual async Task<T> GetById(int id)
     {
         return await Items.FirstOrDefaultAsync(x => x.Id == id);
     }

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Common.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260523174605_Initial")]
-    partial class Initial
+    [Migration("20260528133604_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,17 +182,6 @@ namespace Common.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Age = 25,
-                            Firstname = "Admin",
-                            Lastname = "Istrator",
-                            Password = "adminpass",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Common.Entity.Ability", b =>

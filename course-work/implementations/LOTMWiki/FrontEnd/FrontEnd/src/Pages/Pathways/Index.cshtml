@@ -1,0 +1,177 @@
+@page
+@model FrontEnd.Pages.Pathways.IndexModel
+
+@{
+    ViewData["Title"] = "Pathways";
+
+    var totalPages = Model.Pathways?.Pager == null || Model.Pathways.Pager.PageSize == 0
+        ? 0
+        : (int)Math.Ceiling((double)Model.Pathways.Pager.Count / Model.Pathways.Pager.PageSize);
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold">Pathways</h1>
+            <p class="text-muted">Browse and manage pathways.</p>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a asp-page="/Index" class="btn btn-outline-secondary rounded-3">
+                ← Dashboard
+            </a>
+
+            <a asp-page="Create" class="btn btn-dark rounded-3">
+                + Create Pathway
+            </a>
+        </div>
+    </div>
+
+    <form method="get" class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body">
+            <div class="row g-3 align-items-end">
+
+                <div class="col-md-4">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Search by name" />
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <input asp-for="Description" class="form-control" placeholder="Search by description" />
+                </div>
+
+                <div class="col-md-2">
+                    <label asp-for="OrderBy" class="form-label">Sort By</label>
+                    <select asp-for="OrderBy" class="form-select">
+                        <option value="Name">Name</option>
+                        <option value="Description">Description</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label asp-for="SortAsc" class="form-label">Direction</label>
+                    <select asp-for="SortAsc" class="form-select">
+                        <option value="true">Ascending</option>
+                        <option value="false">Descending</option>
+                    </select>
+                </div>
+
+                <input type="hidden" asp-for="PageSize" value="@Model.PageSize" />
+
+                <div class="col-12 d-flex justify-content-end gap-2">
+                    <a asp-page="./Index" class="btn btn-outline-secondary">Clear</a>
+                    <button type="submit" class="btn btn-dark">Apply</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-0">
+
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th class="ps-4">Name</th>
+                    <th>Description</th>
+                    <th class="text-end pe-4">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @if (Model.Pathways?.Items != null && Model.Pathways.Items.Any())
+                {
+                    @foreach (var item in Model.Pathways.Items)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-semibold">@item.Name</td>
+
+                            <td class="text-muted">
+                                @(string.IsNullOrWhiteSpace(item.Description)
+                                    ? "No description"
+                                    : item.Description)
+                            </td>
+
+                            <td class="text-end pe-4">
+                                <a asp-page="./Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-primary me-2">
+                                    Edit
+                                </a>
+
+                                <a asp-page="./Details"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-secondary me-2">
+                                    Details
+                                </a>
+
+                                <form method="post"
+                                      asp-page-handler="Delete"
+                                      asp-route-id="@item.Id"
+                                      class="d-inline">
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Delete this pathway?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center p-5 text-muted">
+                            No pathways found.
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <div class="text-muted">
+            Page @Model.Pathways.Pager.Page of @totalPages
+            — Total items: @Model.Pathways.Pager.Count
+        </div>
+
+        <div>
+            @if (Model.Pathways.Pager.Page > 1)
+            {
+                <a class="btn btn-outline-dark me-2"
+                   asp-page="./Index"
+                   asp-route-PageNumber="@(Model.Pathways.Pager.Page - 1)"
+                   asp-route-PageSize="@Model.PageSize"
+                   asp-route-Name="@Model.Name"
+                   asp-route-Description="@Model.Description"
+                   asp-route-OrderBy="@Model.OrderBy"
+                   asp-route-SortAsc="@Model.SortAsc">
+                    Previous
+                </a>
+            }
+
+            @if (Model.Pathways.Pager.Page < totalPages)
+            {
+                <a class="btn btn-dark"
+                   asp-page="./Index"
+                   asp-route-PageNumber="@(Model.Pathways.Pager.Page + 1)"
+                   asp-route-PageSize="@Model.PageSize"
+                   asp-route-Name="@Model.Name"
+                   asp-route-Description="@Model.Description"
+                   asp-route-OrderBy="@Model.OrderBy"
+                   asp-route-SortAsc="@Model.SortAsc">
+                    Next
+                </a>
+            }
+        </div>
+    </div>
+</div>

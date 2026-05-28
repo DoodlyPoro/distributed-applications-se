@@ -43,10 +43,10 @@
                 <div class="mb-4">
                     <label class="text-muted small">Sequence</label>
                     <div>
-                        @if (Model.Ability.SequenceId != null)
+                        @if (Model.Ability.SequenceName != null)
                         {
                             <span class="badge bg-primary">
-                                Sequence @Model.Ability.SequenceId
+                                @Model.Ability.SequenceName
                             </span>
                         }
                         else

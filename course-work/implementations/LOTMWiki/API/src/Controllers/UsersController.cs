@@ -24,7 +24,7 @@ public class UsersController : BaseController<User, UserServices, UserRequest, U
         error = null;
 
         item.Username = model.Username;
-        item.Password = model.Password;
+        item.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
         item.Firstname = model.Firstname;
         item.Lastname = model.Lastname;
         item.Age = model.Age;
@@ -43,5 +43,11 @@ public class UsersController : BaseController<User, UserServices, UserRequest, U
     protected override void PopulateGetResponse(UsersGetRequest request, UsersGetResponse response)
     {
         response.Filter = request.Filter;
+    }
+    
+    [AllowAnonymous]
+    public override async Task<IActionResult> Post([FromBody] UserRequest model)
+    {
+        return await base.Post(model);
     }
 }

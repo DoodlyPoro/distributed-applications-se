@@ -35,4 +35,11 @@ public class AuthService
 
         return result?.Token;
     }
+    
+    public async Task<bool> Register(UserRequest request)
+    {
+        var response = await _httpClient.PostAsJsonAsync("users", request);
+
+        return response.IsSuccessStatusCode;
+    }
 }

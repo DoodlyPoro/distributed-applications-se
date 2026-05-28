@@ -29,17 +29,6 @@ public class AppDbContext : DbContext
         #region User
         modelBuilder.Entity<User>()
             .HasKey(u => u.Id);
-
-        modelBuilder.Entity<User>()
-            .HasData(new User
-            {
-                Id = 1,
-                Firstname = "Admin",
-                Lastname = "Istrator",
-                Username = "admin",
-                Password = "adminpass",
-                Age = 25
-            });
         #endregion
         
         #region Character

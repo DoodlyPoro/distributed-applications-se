@@ -22,10 +22,19 @@
             </p>
         </div>
 
-        <a asp-page="Create"
-           class="btn btn-dark rounded-3">
-            + Create Ability
-        </a>
+        <div class="d-flex gap-2">
+
+            <a asp-page="/Index"
+               class="btn btn-outline-secondary rounded-3">
+                ← Dashboard
+            </a>
+
+            <a asp-page="Create"
+               class="btn btn-dark rounded-3">
+                + Create Ability
+            </a>
+
+        </div>
 
     </div>
 
@@ -125,10 +134,10 @@
 
                             <td>
 
-                                @if (item.SequenceId != null)
+                                @if (!string.IsNullOrEmpty(item.SequenceName))
                                 {
                                     <span class="badge bg-primary">
-                                        Sequence @item.SequenceId
+                                        @item.SequenceName
                                     </span>
                                 }
                                 else

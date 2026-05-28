@@ -24,11 +24,15 @@ public class AuthController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ServiceResultExtension<List<Error>>.Failure(null, ModelState));
 
-        User loggedUser = (await userServices.GetAll()).FirstOrDefault(u =>
-            u.Username == tokenRequest.Username &&
-            u.Password == tokenRequest.Password);
+        User? loggedUser = (await userServices.GetAll((u =>
+            u.Username == tokenRequest.Username))).FirstOrDefault();
+        
+        Console.WriteLine($"LOGIN USERNAME: {tokenRequest.Username}");
+        Console.WriteLine($"LOGIN PASSWORD: {tokenRequest.Password}");
+        Console.WriteLine($"DB USER FOUND: {loggedUser != null}");
+        Console.WriteLine($"DB HASH: {loggedUser?.Password}");
 
-        if (loggedUser == null)
+        if (loggedUser == null || !BCrypt.Net.BCrypt.Verify(tokenRequest.Password, loggedUser.Password))
         {
             ModelState.AddModelError("Global", "Invalid username or password.");
             

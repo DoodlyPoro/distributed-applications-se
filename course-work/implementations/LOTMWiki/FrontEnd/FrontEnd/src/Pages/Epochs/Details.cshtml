@@ -1,0 +1,57 @@
+@page "{id:int}"
+@model FrontEnd.Pages.Epochs.DetailsModel
+
+@{
+    ViewData["Title"] = "Epoch Details";
+}
+
+<div class="container mt-5" style="max-width: 700px;">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">Epoch Details</h2>
+            <p class="text-muted mb-4">Read-only information about this epoch.</p>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="alert alert-danger">@Model.Error</div>
+            }
+            else if (Model.Epoch != null)
+            {
+                <div class="mb-4">
+                    <label class="text-muted small">Name</label>
+                    <div class="fs-5 fw-semibold">@Model.Epoch.Name</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Number</label>
+                    <div>@Model.Epoch.Number</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">Start Year</label>
+                    <div>@Model.Epoch.StartYear</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-muted small">End Year</label>
+                    <div>@Model.Epoch.EndYear</div>
+                </div>
+            }
+
+            <div class="d-flex justify-content-between">
+                <a asp-page="/Epochs/Index" class="btn btn-outline-secondary">Back</a>
+
+                @if (Model.Epoch != null)
+                {
+                    <a asp-page="/Epochs/Edit"
+                       asp-route-id="@Model.Epoch.Id"
+                       class="btn btn-dark">
+                        Edit
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

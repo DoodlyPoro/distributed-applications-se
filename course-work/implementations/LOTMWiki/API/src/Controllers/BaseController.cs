@@ -17,7 +17,7 @@ where E : BaseEntity, new()
 where EService : BaseService<E>
 where ERequest : class, new()
 where EGetRequest : BaseGetRequest, new()
-where EResponse : class
+where EResponse : class, new()
 where EGetResponse : BaseGetResponse<EResponse>, new()
 {
     protected readonly EService Service;
@@ -77,11 +77,12 @@ where EGetResponse : BaseGetResponse<EResponse>, new()
     public async Task<IActionResult> Get([FromRoute] int id)
     {
         var item = await Service.GetById(id);
-        return Ok(ServiceResult<E>.Success(item));
+        var response = Mapper.Map<EResponse>(item);
+        return Ok(ServiceResult<EResponse>.Success(response));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] ERequest model)
+    public virtual async Task<IActionResult> Post([FromBody] ERequest model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
